@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Home from './stepform/Home';
+// import Exampl from './components/Exampl';
+// import Formtask from './components/Formtask';
+import Stepone from './stepform/Stepone';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+      <Routes>
+        
+        <Route exact path="/" element={<Home/>} />
+        <Route path="/form" element={<Stepone/>}/>
+      </Routes>
+    </Router>
+      <div>
+      {/* <Stepone/> */}
+      </div>
+   
+    
     </div>
+
   );
 }
 
