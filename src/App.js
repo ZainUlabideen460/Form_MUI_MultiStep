@@ -1,29 +1,66 @@
-// import logo from './logo.svg';
-import './App.css';
-import Home from './stepform/Home';
-// import Exampl from './components/Exampl';
-// import Formtask from './components/Formtask';
-import Stepone from './stepform/Stepone';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Sidebar from "./components/sidbar";
+import Header from "./components/Header";
+import Dashboard from "./pages/Dashboard";
 
-function App(props) {
+import Orders from "./pages/Orders";
+import Users from "./pages/Users";
+import { Logout } from "./pages/Logout";
+import { Login } from "./pages/Login";
+
+// Layout component to wrap authenticated routes
+const DashboardLayout = ({ children }) => {
   return (
-    <div className="App">
+    <div className="min-h-screen flex flex-col">
+      {/* Full width header */}
+      <Header />
+      <div className="flex-1 flex">
+        {/* Sidebar below the header */}
+        <Sidebar />
+        <div className="flex-1 p-4 bg-gray-100">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const App = () => {
+  // You can add authentication check here
+  const isAuthenticated = true; // Replace with your auth logic
+
+  return (
     <Router>
       <Routes>
-        
-        <Route exact path="/" element={<Home/>} />
-        <Route path="/form" element={<Stepone/>}/>
+        {/* Public route */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Redirect root to dashboard */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        {/* Protected routes */}
+        <Route
+          path="/*"
+          element={
+            isAuthenticated ? (
+              <DashboardLayout>
+                <Routes>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="orders" element={<Orders />} />
+                  <Route path="users" element={<Users />} />
+                  <Route path="logout" element={<Logout />} />
+                </Routes>
+              </DashboardLayout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
       </Routes>
     </Router>
-      <div>
-      {/* <Stepone/> */}
-      </div>
-   
-    
-    </div>
-
   );
-}
+};
 
 export default App;
+ 
