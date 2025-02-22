@@ -34,10 +34,11 @@ const App = () => {
     <Router>
       <Routes>
         {/* Public route */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
 
         {/* Redirect root to dashboard */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        {/* <Route path="/" element={<Navigate to="/dashboard" replace />} /> */}
 
         {/* Protected routes */}
         <Route

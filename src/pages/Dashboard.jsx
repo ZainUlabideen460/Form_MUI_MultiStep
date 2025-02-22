@@ -1,32 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FaCoffee, FaShoppingCart, FaExclamationTriangle, FaTruck, FaChartBar, FaClipboardList } from "react-icons/fa";
 
 const Dashboard = () => {
+  const [dashboardData, setDashboardData] = useState({
+    totalInventoryValue: "Loading...",
+    salesToday: "Loading...",
+    lowStockAlerts: "Loading...",
+    incomingDeliveries: "Loading...",
+    recentActivities: []
+  });
+
+  useEffect(() => {
+    // axios.get('https://localhost:7296/api/Dashboard')
+    axios.get('http://raoyasirnisar-001-site5.ntempurl.com/api/Dashboard')
+      .then(response => {
+        setDashboardData(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+      });
+  }, []);
+
   return (
     <div className="p-8">
       {/* Cards Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <DashboardCard
           title="Total Inventory Value"
-          value="AED 100,000"
+          value={dashboardData.totalInventoryValue}
           icon={<FaCoffee />}
           color="bg-gradient-to-r from-teal-400 to-teal-600"
         />
         <DashboardCard
           title="Sales Today"
-          value="AED 5,000"
+          value={dashboardData.salesToday}
           icon={<FaShoppingCart />}
           color="bg-gradient-to-r from-green-400 to-green-600"
         />
         <DashboardCard
           title="Low Stock Alerts"
-          value="3 Items"
+          value={dashboardData.lowStockAlerts}
           icon={<FaExclamationTriangle />}
           color="bg-gradient-to-r from-yellow-400 to-yellow-600"
         />
         <DashboardCard
           title="Incoming Deliveries"
-          value="2 Orders"
+          value={dashboardData.incomingDeliveries}
           icon={<FaTruck />}
           color="bg-gradient-to-r from-red-400 to-red-600"
         />
@@ -47,30 +67,15 @@ const Dashboard = () => {
         <div className="flex-1 p-6 bg-white rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
           <div className="space-y-4">
-            <RecentActivityCard
-              title="New inventory received"
-              timestamp="2 hours ago"
-              icon={<FaClipboardList />}
-              color="bg-gradient-to-r from-teal-500 to-teal-700"
-            />
-            <RecentActivityCard
-              title="Order #123 shipped"
-              timestamp="5 hours ago"
-              icon={<FaShoppingCart />}
-              color="bg-gradient-to-r from-green-500 to-green-700"
-            />
-            <RecentActivityCard
-              title="Low stock alert on Tapioca Pearls"
-              timestamp="1 day ago"
-              icon={<FaExclamationTriangle />}
-              color="bg-gradient-to-r from-yellow-500 to-yellow-700"
-            />
-            <RecentActivityCard
-              title="Supplier update: Green Coffee Beans"
-              timestamp="2 days ago"
-              icon={<FaTruck />}
-              color="bg-gradient-to-r from-red-500 to-red-700"
-            />
+            {dashboardData.recentActivities.map((activity, index) => (
+              <RecentActivityCard
+                key={index}
+                title={activity.title}
+                timestamp={activity.timestamp}
+                icon={getIcon(activity.icon)}
+                color={activity.color}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -100,6 +105,25 @@ const RecentActivityCard = ({ title, timestamp, icon, color }) => {
       </div>
     </div>
   );
+};
+
+const getIcon = (iconName) => {
+  switch (iconName) {
+    case 'FaCoffee':
+      return <FaCoffee />;
+    case 'FaShoppingCart':
+      return <FaShoppingCart />;
+    case 'FaExclamationTriangle':
+      return <FaExclamationTriangle />;
+    case 'FaTruck':
+      return <FaTruck />;
+    case 'FaChartBar':
+      return <FaChartBar />;
+    case 'FaClipboardList':
+      return <FaClipboardList />;
+    default:
+      return <FaClipboardList />;
+  }
 };
 
 export default Dashboard;
