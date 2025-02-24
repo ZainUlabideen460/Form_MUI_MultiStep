@@ -105,7 +105,7 @@ const Product = () => {
   };
 
   return (
-    // <div className="relative max-w-screen-lg mx-auto p-6 bg-gradient-to-r from-blue-200 to-teal-100 rounded-xl shadow-lg">
+    
     <div className="relative w-full h-screen mx-auto p-6 bg-gradient-to-r from-blue-200 to-teal-100 rounded-xl shadow-lg">
       {/* Loader */}
       {isLoading && (
