@@ -34,13 +34,13 @@ const Header = () => {
   const formattedTime = time.toLocaleTimeString();
 
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-purple-900 h-24 flex items-center justify-between px-6 shadow-md">
+    <div className="bg-gradient-to-r from-blue-500 to-purple-900 h-36 flex items-center justify-between px-6 shadow-md">
       {/* Left side - Logo */}
       <div className="flex items-center space-x-3">
         <img
           src={logo}
           alt="Tihami Coffee"
-          className="w-24 h-24 rounded-md"
+          className="w-32 h-28 "
         />
       </div>
 

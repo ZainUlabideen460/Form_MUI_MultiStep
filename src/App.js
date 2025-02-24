@@ -8,6 +8,7 @@ import Orders from "./pages/Orders";
 import Users from "./pages/Users";
 import { Logout } from "./pages/Logout";
 import { Login } from "./pages/Login";
+import Product from "./pages/Product";
 
 // Layout component to wrap authenticated routes
 const DashboardLayout = ({ children }) => {
@@ -48,6 +49,7 @@ const App = () => {
               <DashboardLayout>
                 <Routes>
                   <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="product" element={<Product />} />
                   <Route path="orders" element={<Orders />} />
                   <Route path="users" element={<Users />} />
                   <Route path="logout" element={<Logout />} />

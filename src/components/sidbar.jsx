@@ -35,6 +35,7 @@ const Sidebar = () => {
       <nav className="flex-1 mt-4 bg-black">
         <ul className="space-y-2">
           <SidebarItem Icon={FaTachometerAlt} text="Dashboard" link="/dashboard" isOpen={isOpen} active={location.pathname === "/dashboard"} />
+          <SidebarItem Icon={FaBox} text="Product" link="/product" isOpen={isOpen} active={location.pathname === "/product"} />
           <SidebarItem Icon={FaBox} text="Inventory Management" link="/inventory" isOpen={isOpen} active={location.pathname === "/inventory"} />
           <SidebarItem Icon={FaClipboardList} text="Orders" link="/orders" isOpen={isOpen} active={location.pathname === "/orders"} />
           <SidebarItem Icon={FaUsers} text="Suppliers" link="/suppliers" isOpen={isOpen} active={location.pathname === "/suppliers"} />
