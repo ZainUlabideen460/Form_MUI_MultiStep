@@ -28,11 +28,11 @@ export const Login = () => {
         setLoading(false);
         return;
       }
-      if (!checkRemember) {
-        setError("Please remember me");
-        setLoading(false);
-        return;
-      }
+      // if (!checkRemember) {
+      //   setError("Please remember me");
+      //   setLoading(false);
+      //   return;
+      // }
       if (username === "admin" && password === "1234") {
         setError("");
         navigate("/dashboard");
@@ -48,9 +48,9 @@ export const Login = () => {
     if (e.target.name === "username") {
       setUsername(e.target.value);
     }
-    if (e.target.name === "checkRemember") {
-      setCheckRemember(e.target.checked);
-    }
+    // if (e.target.name === "checkRemember") {
+    //   setCheckRemember(e.target.checked);
+    // }
     if (e.target.name === "password") {
       setPassword(e.target.value);
     }
