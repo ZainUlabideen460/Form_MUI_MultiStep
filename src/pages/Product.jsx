@@ -117,7 +117,7 @@ const Product = () => {
 
       {/* Form for Adding Product */}
       <div className="bg-white p-8 rounded-lg shadow-xl border-2 border-blue-400">
-        <h2 className="text-3xl text-center font-semibold text-gray-800 mb-6">Add Product</h2>
+        <h2 className="text-2xl text-start font-semibold text-blue-800 mb-6">Add Product</h2>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
